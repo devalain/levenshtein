@@ -1,3 +1,14 @@
+/// Compute the Levenshtein distance between to strings.
+/// 
+/// See the [Wikipedia article](https://en.wikipedia.org/wiki/Levenshtein_distance)
+///
+/// # Example
+/// ```
+/// use levenshtein::lev;
+/// let a = String::from("Hello");
+/// let b = String::from("World");
+/// assert_eq!(4, lev(&a, &b));
+/// ```
 pub fn lev(a: &str, b: &str) -> usize {
     match (a.len(), b.len()) {
         (0, b_len) => b_len,
