@@ -1,20 +1,26 @@
 /// Compute the Levenshtein distance between to strings.
 /// 
-/// See the [Wikipedia article](https://en.wikipedia.org/wiki/Levenshtein_distance)
+/// See the [Wikipedia article](https://en.wikipedia.org/wiki/Levenshtein_distance).
+///
+/// The [Wagner–Fischer algorithm](https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm) 
+/// is used to compute the distance.
 ///
 /// # Example
 /// ```
 /// use levenshtein::lev;
 /// let a = "Hello";
 /// let b = "World";
-/// assert_eq!(4, lev::<10>(a, b));
+/// assert_eq!(4, lev::<6>(a, b));
 /// ```
-pub fn lev<const MAX_WORD_SIZE: usize>(a: &str, b: &str) -> usize {
+///
+/// # Panics
+/// May panic if `a` or `b` has a length which is greater than `MAX - 1`.
+pub fn lev<const MAX: usize>(a: &str, b: &str) -> usize {
     match (a.len(), b.len()) {
         (0, b_len) => b_len,
         (a_len, 0) => a_len,
         (a_len, b_len) => {
-            let mut d: [[usize;MAX_WORD_SIZE];MAX_WORD_SIZE] = [[0;MAX_WORD_SIZE];MAX_WORD_SIZE];
+            let mut d: [[usize ; MAX] ; MAX] = [[0 ; MAX] ; MAX];
             for i in 1..=a_len {
                 d[i][0] = i;
             }
