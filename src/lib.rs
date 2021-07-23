@@ -5,9 +5,9 @@
 /// # Example
 /// ```
 /// use levenshtein::lev;
-/// let a = String::from("Hello");
-/// let b = String::from("World");
-/// assert_eq!(4, lev(&a, &b));
+/// let a = "Hello";
+/// let b = "World";
+/// assert_eq!(4, lev(a, b));
 /// ```
 pub fn lev(a: &str, b: &str) -> usize {
     match (a.len(), b.len()) {
@@ -35,43 +35,43 @@ mod tests {
 
     #[test]
     fn empty_strings() {
-        let a = String::from("");
-        let b = String::from("");
-        assert_eq!(0, lev(&a, &b));
+        let a = "";
+        let b = "";
+        assert_eq!(0, lev(a, b));
     }
 
     #[test]
     fn same_strings_len_1() {
-        let a = String::from("e");
-        let b = String::from("e");
-        assert_eq!(0, lev(&a, &b));
+        let a = "e";
+        let b = "e";
+        assert_eq!(0, lev(a, b));
     }
 
     #[test]
     fn different_strings_len_1() {
-        let a = String::from("e");
-        let b = String::from("p");
-        assert_eq!(1, lev(&a, &b));
+        let a = "e";
+        let b = "p";
+        assert_eq!(1, lev(a, b));
     }
 
     #[test]
     fn same_strings() {
-        let a = String::from("examen");
-        let b = String::from("examen");
-        assert_eq!(0, lev(&a, &b));
+        let a = "examen";
+        let b = "examen";
+        assert_eq!(0, lev(a, b));
     }
     
     #[test]
     fn distance_1_strings() {
-        let a = String::from("examen");
-        let b = String::from("examan");
-        assert_eq!(1, lev(&a, &b));
+        let a = "examen";
+        let b = "examan";
+        assert_eq!(1, lev(a, b));
     }
     
     #[test]
     fn distance_4_strings() {
-        let a = String::from("Hello");
-        let b = String::from("World");
-        assert_eq!(4, lev(&a, &b));
+        let a = "Hello";
+        let b = "World";
+        assert_eq!(4, lev(a, b));
     }
 }
