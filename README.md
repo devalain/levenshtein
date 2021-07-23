@@ -13,4 +13,9 @@ assert_eq!(4, lev(a, b));
 ```
 
 # Finding the nearest word in a dictionnary
-Example dictionnary can be found in [this repo.](https://github.com/dwyl/english-words).
+Example dictionnary can be found in [this repo](https://github.com/dwyl/english-words).
+
+You can download a dictionnary and try the example called `didyoumean` like this
+```bash
+cargo run --release --example didyoumean <a word> <a dictionnary filename>
+```
