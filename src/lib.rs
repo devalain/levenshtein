@@ -1,9 +1,9 @@
-/// Compute the Levenshtein distance between to strings.
+/// Compute the Levenshtein distance between two strings.
+///
+/// The generic parameter `MAX` is the size of the square matrix used in the 
+/// [Wagner–Fischer algorithm](https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm).
 /// 
 /// See the [Wikipedia article](https://en.wikipedia.org/wiki/Levenshtein_distance).
-///
-/// The [Wagner–Fischer algorithm](https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm) 
-/// is used to compute the distance.
 ///
 /// # Example
 /// ```
@@ -15,6 +15,7 @@
 ///
 /// # Panics
 /// May panic if `a` or `b` has a length which is greater than `MAX - 1`.
+///
 pub fn lev<const MAX: usize>(a: &str, b: &str) -> usize {
     match (a.len(), b.len()) {
         (0, b_len) => b_len,
