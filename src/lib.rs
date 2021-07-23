@@ -10,21 +10,41 @@
 /// assert_eq!(4, lev(a, b));
 /// ```
 pub fn lev(a: &str, b: &str) -> usize {
+    const MAX_WORD_SIZE: usize = 256;
     match (a.len(), b.len()) {
         (0, b_len) => b_len,
         (a_len, 0) => a_len,
-        (_, _) => {
-            if a.chars().next() == b.chars().next() {
-                lev(&a[1..], &b[1..]) // Warning case a.len() == 1 !
-            } else {
-                1 + usize::min(
-                    lev(&a[1..], b),
-                    usize::min(
-                        lev(a, &b[1..]),
-                        lev(&a[1..], &b[1..])
-                    )
-                )
+        (a_len, b_len) => {
+            let mut d: [[usize;MAX_WORD_SIZE];MAX_WORD_SIZE] = [[0;MAX_WORD_SIZE];MAX_WORD_SIZE];
+            for i in 1..=a_len {
+                d[i][0] = i;
             }
+            for j in 1..=b_len {
+                d[0][j] = j;
+            }
+
+            let mut b_iter = b.chars();
+            for j in 1..=b_len {
+                let b_char = b_iter.next();
+                let mut a_iter = a.chars();
+                for i in 1..=a_len {
+                    let a_char = a_iter.next();
+                    let cost = if a_char == b_char {
+                        0
+                    } else {
+                        1
+                    };
+
+                    d[i][j] = usize::min(
+                        d[i-1][j] + 1,
+                        usize::min(
+                            d[i][j-1] + 1,
+                            d[i-1][j-1] + cost
+                        )
+                    );
+                }
+            }
+            d[a_len][b_len]
         }
     }
 }
