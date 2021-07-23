@@ -7,10 +7,9 @@
 /// use levenshtein::lev;
 /// let a = "Hello";
 /// let b = "World";
-/// assert_eq!(4, lev(a, b));
+/// assert_eq!(4, lev::<10>(a, b));
 /// ```
-pub fn lev(a: &str, b: &str) -> usize {
-    const MAX_WORD_SIZE: usize = 256;
+pub fn lev<const MAX_WORD_SIZE: usize>(a: &str, b: &str) -> usize {
     match (a.len(), b.len()) {
         (0, b_len) => b_len,
         (a_len, 0) => a_len,
@@ -51,7 +50,12 @@ pub fn lev(a: &str, b: &str) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::lev as g_lev;
+
+    #[inline]
+    fn lev(a: &str, b: &str) -> usize {
+        g_lev::<100>(a, b)
+    }
 
     #[test]
     fn empty_strings() {
