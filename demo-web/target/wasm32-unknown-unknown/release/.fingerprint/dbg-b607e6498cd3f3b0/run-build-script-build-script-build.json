@@ -1,0 +1,1 @@
+{"rustc":10026429466883849012,"features":"","target":0,"profile":0,"path":0,"deps":[[12436905360880490149,"build_script_build",false,5409709686880783093]],"local":[{"RerunIfChanged":{"output":"wasm32-unknown-unknown/release/build/dbg-b607e6498cd3f3b0/output","paths":["build.rs"]}}],"rustflags":[],"metadata":0,"config":0,"compile_kind":0}

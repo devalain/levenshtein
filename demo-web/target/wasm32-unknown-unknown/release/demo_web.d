@@ -1,0 +1,1 @@
+/home/alain/Dev/rust/levenshtein/demo-web/target/wasm32-unknown-unknown/release/demo_web.wasm: /home/alain/Dev/rust/levenshtein/demo-web/src/lib.rs /home/alain/Dev/rust/levenshtein/src/lib.rs build.rs
