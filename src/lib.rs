@@ -17,42 +17,44 @@
 /// May panic if `a` or `b` has a length which is greater than `MAX - 1`.
 ///
 pub fn lev<const MAX: usize>(a: &str, b: &str) -> usize {
-    match (a.len(), b.len()) {
-        (0, b_len) => b_len,
-        (a_len, 0) => a_len,
-        (a_len, b_len) => {
-            let mut d: [[usize ; MAX] ; MAX] = [[0 ; MAX] ; MAX];
-            for i in 1..=a_len {
-                d[i][0] = i;
-            }
-            for j in 1..=b_len {
-                d[0][j] = j;
-            }
+    let (a_len, b_len) = match (a.len(), b.len()) {
+        (0, b_len) => return b_len,
+        (a_len, 0) => return a_len,
+        (a_len, b_len) => (a_len, b_len)
+    };
+    if a == b {
+        return 0;
+    }
+    let mut d: [[usize ; MAX] ; MAX] = [[0 ; MAX] ; MAX];
+    for i in 1..=a_len {
+        d[i][0] = i;
+    }
+    for j in 1..=b_len {
+        d[0][j] = j;
+    }
 
-            let mut b_iter = b.chars();
-            for j in 1..=b_len {
-                let b_char = b_iter.next();
-                let mut a_iter = a.chars();
-                for i in 1..=a_len {
-                    let a_char = a_iter.next();
-                    let cost = if a_char == b_char {
-                        0
-                    } else {
-                        1
-                    };
+    let mut b_iter = b.chars();
+    for j in 1..=b_len {
+        let b_char = b_iter.next();
+        let mut a_iter = a.chars();
+        for i in 1..=a_len {
+            let a_char = a_iter.next();
+            let cost = if a_char == b_char {
+                0
+            } else {
+                1
+            };
 
-                    d[i][j] = usize::min(
-                        d[i-1][j] + 1,
-                        usize::min(
-                            d[i][j-1] + 1,
-                            d[i-1][j-1] + cost
-                        )
-                    );
-                }
-            }
-            d[a_len][b_len]
+            d[i][j] = usize::min(
+                d[i-1][j] + 1,
+                usize::min(
+                    d[i][j-1] + 1,
+                    d[i-1][j-1] + cost
+                )
+            );
         }
     }
+    d[a_len][b_len]
 }
 
 #[cfg(test)]
