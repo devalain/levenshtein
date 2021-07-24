@@ -12,9 +12,14 @@ fn update(_msg: Msg, _model: &mut DemoLevenshtein, orders: &mut impl Orders<Msg>
 }
 fn view(_model: &DemoLevenshtein) -> Vec<Node<Msg>> {
     nodes![
-        input!(attrs![
-            "type" => "text"
-        ])
+        label!(
+            attrs!["for" => "word"],
+            "Enter a french word: "
+        ),
+        input!(
+            id!("word"),
+            attrs!["type" => "text"]
+        )
     ]
 }
 

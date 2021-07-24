@@ -11,8 +11,8 @@ edition = "2018"
 [lib]
 crate-type = ["cdylib"]
 
-[dev-dependencies]
-wasm-bindgen-test = "0.3"
+# [dev-dependencies]
+# wasm-bindgen-test = "0.3"
 
 [dependencies]
 seed = "0.8"
