@@ -1,14 +1,30 @@
+use levenshtein::lev;
 use seed::{*, prelude::*};
 
-pub enum Msg {}
-
-struct DemoLevenshtein {}
-
-fn init(_url: Url, _orders: &mut impl Orders<Msg>) -> DemoLevenshtein {
-    DemoLevenshtein {}
+pub enum Msg {
+    Words(Result<Vec<String>, FetchError>)
 }
-fn update(_msg: Msg, _model: &mut DemoLevenshtein, orders: &mut impl Orders<Msg>) {
+
+struct DemoLevenshtein {
+    words: Vec<String>
+}
+
+fn init(_url: Url, orders: &mut impl Orders<Msg>) -> DemoLevenshtein {
+    orders.perform_cmd(async move {
+        Msg::Words(Ok(Vec::new()))
+    });
+    DemoLevenshtein { words: Vec::new() }
+}
+fn update(msg: Msg, _model: &mut DemoLevenshtein, orders: &mut impl Orders<Msg>) {
     orders.skip();
+    match msg {
+        Msg::Words(Ok(data)) => {
+            ::seed::log!(data);
+        },
+        Msg::Words(Err(e)) => {
+            ::seed::error!(e);
+        },
+    }
 }
 fn view(_model: &DemoLevenshtein) -> Vec<Node<Msg>> {
     nodes![
