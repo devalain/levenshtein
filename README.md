@@ -3,6 +3,7 @@ Rust library to compute the Levenshtein distance between words or find the neare
 
 See the [Wikipedia article](https://en.wikipedia.org/wiki/Levenshtein_distance) and the algorithm used 
 is [this one](https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm).
+This actual algorithm was inspired by [wooorm](https://github.com/wooorm/levenshtein-rs).
 
 ## Comparing words
 ```rust
