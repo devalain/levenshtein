@@ -13,8 +13,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut args = std::env::args();
     let _ = args.next();
     let word = args.next().ok_or_else(|| ArgsError("Please provide a word"))?;
+    let dico_file = args.next().ok_or_else(|| ArgsError("Please provide a dictionnary file name"))?;
 
-    let contents = include_str!("/tmp/alain/mots.txt");
+    use std::fs::File;
+    use std::io::prelude::*;
+    let mut file = File::open(dico_file).expect("Failed to open dico file");
+    let mut contents = String::new();
+    file.read_to_string(&mut contents).expect("Failed to read dico file");
+
     let contents = contents.replace("\r", "");
     let words = contents.split("\n").collect::<Vec<&str>>();
 
