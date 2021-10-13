@@ -20,6 +20,3 @@ You can download a dictionnary and try the example called `didyoumean` like this
 ```bash
 cargo run --release --example didyoumean <a word> <a dictionnary filename>
 ```
-
-## Online demo
-See [there](https://test.alain.dev) for a demo (with a french dictionnary).
